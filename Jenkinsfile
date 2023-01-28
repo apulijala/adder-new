@@ -1,7 +1,7 @@
 pipeline{
 
 
-    agent { label 'java-docker-jnlp' }
+    agent { any }
 
     stages{
         
