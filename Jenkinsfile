@@ -1,12 +1,7 @@
 pipeline{
 
 
-   agent {
-
-    docker { image 'python:3' }
-
-      
-    }
+   agent { label 'java-docker-jnlp' }
 
     stages{
         
