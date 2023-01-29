@@ -4,9 +4,8 @@ pipeline{
    // agent { label 'java-docker-jnlp' }
    agent {
 
-       docker {
-            label 'docker1'
-            image 'python:3'
+       dockerfile {
+            label 'docker'
        }
     }
 
