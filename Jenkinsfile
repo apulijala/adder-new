@@ -12,9 +12,9 @@ pipeline{
     stages{
         
         stage ("Hello From Github") {
-            steps {
-                echo "Hello From Github"
-            }
+          steps {
+            echo "Hello From Github"
+          }
         } 
 
         stage("Compile"){
