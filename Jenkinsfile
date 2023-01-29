@@ -36,17 +36,19 @@ pipeline{
                 sh 'python3 adder.py 3 4'
             }
 
-           
-        }
-
-         post {
+            post {
                 always{
                     echo "====++++always++++===="
                     archiveArtifacts artifacts: 'coverage.xml', followSymlinks: false
                 }
             }
+
+           
+        }
         
 
     }
 
 }
+
+
