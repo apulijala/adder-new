@@ -15,7 +15,6 @@ pipeline{
           steps {
             echo "Hello From Github"
           }
-          
         } 
 
         stage("Compile"){
