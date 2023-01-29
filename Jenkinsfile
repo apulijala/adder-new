@@ -23,7 +23,10 @@ pipeline{
             
             steps{
 
-                sh 'python3 -m unittest adder.py'
+                sh ''' python3 -m pytest \
+                 -v --junitxml=junit.xml \
+                 --cov-report xml --cov adder adder.py
+                '''
             }
         }
         stage("Run Python"){
