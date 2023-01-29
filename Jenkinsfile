@@ -10,6 +10,7 @@ pipeline{
     }
 
     stages{
+        
         stage("Compile"){
             
             steps{
@@ -35,14 +36,6 @@ pipeline{
                 sh 'python3 adder.py 3 4'
             }
         }
-
-        post{
-            always{
-                junit 'junit.xml'
-                cobertura  coberturaReportFile: 'covnerage.xml' 
-            }
-        }
-
         
 
     }
