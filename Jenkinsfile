@@ -10,6 +10,10 @@ pipeline{
     }
 
     stages{
+        
+        stage ("Hello From Github") {
+          echo "Hello From Github"
+        } 
 
         stage("Compile"){
             
