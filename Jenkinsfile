@@ -1,7 +1,14 @@
 pipeline{
 
 
-   agent { label 'java-docker-jnlp' }
+   // agent { label 'java-docker-jnlp' }
+   agent {
+
+       docker {
+            label 'docker'
+            image 'python:3'
+       }
+    }
 
     stages{
         stage("Compile"){
