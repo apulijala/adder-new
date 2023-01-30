@@ -13,12 +13,12 @@ pipeline{
     stages{
         stage("Get Next Version"){
             steps{
-                echo "========executing A========"
+                echo "${DOCKER} or ${DOCKER_PSW} and ${DOCKER_USR}"
             }
             
         }
     }
-    
+
     post{
         always{
             echo "========always========"
