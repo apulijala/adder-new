@@ -79,7 +79,7 @@ pipeline{
 
                 script {
                     try {
-                       container = docker.build("git", "-f git.dockerfile")
+                       container = docker.build("git", "-f git.dockerfile .")
                        container.inside {
 
                         withCredentials([
