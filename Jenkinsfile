@@ -85,8 +85,8 @@ pipeline {
                             credentialsId: 'myjenkins-priv-key', 
                             keyFileVariable: 'KEYFILE')]) {
                         withEnv(['GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -i ${KEYFILE}']) {
-                            sh "git tag ${version_g}"
-                            sh "git push origin ${version_g}"
+                                sh "git tag ${version_g}"
+                                sh "git push origin ${version_g}"
                             } 
                         } 
                         } 
