@@ -59,6 +59,10 @@ pipeline{
                 sh """
                 export version_s=\$(cat ./version_f)
                 echo \$version_s
+                ./package.sh \${version_s}
+                ./integration-test.sh 11 8 3 \${version_g}
+                echo \${DOCKER_PSW} > docker-password 
+                
                 """
             }
             
