@@ -1,5 +1,6 @@
 #!/bin/bash 
-set -e -o pipefail 
+# set -e -o pipefail 
+
 next_version=$(git tag | egrep '^[0-9]+\.[0-9]+\.[0-9]+$'| sort --version-sort | tail -1  | awk -F . '{print $1 "." $2+1 ".0"}')
 
 if [ -z "$next_version"  ]; then
