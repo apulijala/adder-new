@@ -56,7 +56,9 @@ pipeline{
                 }
             }
             steps{
-                echo "====++++executing A++++===="
+                sh """
+                export version_s=$(cat ./version_f)
+                """
             }
             
         }
