@@ -87,8 +87,9 @@ pipeline {
                                 credentialsId: 'github-arvind-private', 
                                 keyFileVariable: 'KEYFILE')]) {
 
-                                echo "${KEYFILE}"
+                          
                                 withEnv(['GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -i ${KEYFILE}']) {
+                                    echo "Issuing Git comamnd."
                                     sh "git tag ${version_g}"
                                     sh "git push origin ${version_g}"
                                     } 
