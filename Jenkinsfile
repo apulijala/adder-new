@@ -84,6 +84,12 @@ pipeline {
                         container = docker.build("git", "-f git.dockerfile .")
                         container.inside {
                                 echo "Hello World"
+                                withCredentials([sshUserPrivateKey(
+                                                credentialsId: 'github-calvinpark-priv', 
+                                                keyFileVariable: 'KEYFILE')]) {
+                                    echo "Inside Credentials"
+
+                                }
 
                         } 
                 }
