@@ -83,20 +83,13 @@ pipeline {
 
                         container = docker.build("git", "-f git.dockerfile .")
                         container.inside {
+                                
                                 echo "Hello World"
-                                withCredentials([sshUserPrivateKey(
-                                                credentialsId: 'github-arvind-private', 
-                                                keyFileVariable: 'KEYFILE')]) {
-                                    echo "Inside Credentials"
-
-                                    withEnv(['GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -i ${KEYFILE}']) {
-
-                                            echo "In Environment"
+                                sshagent (credentials: ['github-arvind-private']) {
+                                         echo "In Environment"
                                             sh("git status")
                                             sh "git tag ${version_g}"
                                             sh "git push origin ${version_g}"
-                                    }
-
                                 }
 
                         } 
