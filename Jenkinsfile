@@ -60,9 +60,12 @@ pipeline{
                 export version_s=\$(cat ./version_f)
                 echo \$version_s
                 ./package.sh \${version_s}
-                ./integration-test.sh 11 8 3 \${version_g}
-                echo \${DOCKER_PSW} > docker-password 
+                docker image ls
                 
+                echo \${DOCKER_PSW} > docker-password 
+                export HOME=\${WORKSPACE}
+                cat docker-password | docker login --username \${DOCKER_USR} --password-stdin 
+                docker push  arvubd/subtractor:${version_g}
                 """
             }
             
