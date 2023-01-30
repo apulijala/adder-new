@@ -57,7 +57,7 @@ pipeline{
             }
             steps{
                 sh """
-                export version_s=$(cat ./version_f)
+                export version_s=\$(cat ./version_f)
                 """
             }
             
