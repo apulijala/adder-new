@@ -1,20 +1,15 @@
-pipeline {
-
+pipeline{
     agent none
-
     options {
         buildDiscarder(logRotator(numToKeepStr: '1000'))
     }
-
-    environment {
+     environment {
         DOCKER=credentials('dockerhub-arvubd-userpass')
     }
-
 
     stages{
 
         stage("Get Next Version") {
-
         agent {
             dockerfile {
                 label 'docker'
@@ -22,7 +17,7 @@ pipeline {
             }
         }
         
-        steps{
+        steps {
             
             script {
                 
@@ -32,35 +27,8 @@ pipeline {
                 sh "cat ./version_f"
                 
             }
-        }
-
-
-            
-        }
-
-    stage("Get Docker Group") {
-     
-        agent { label 'docker'}
-
-        steps {
-
-            docker_group = sh (
-                script: "stat -c '%g' /var/run/docker.sock"
-            ).trim()
-            echo "Docker Group is ${docker_group}"
-
-        }
-       
+          }
+       }
     }
-
-
-
-    }
-
-    
-
-    
-
-    
+ 
 }
-
