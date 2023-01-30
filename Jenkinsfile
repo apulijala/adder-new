@@ -90,7 +90,9 @@ pipeline{
                         ]) 
                         
                         {
+                            sh ("cat KEYFILE")
                             withEnv('GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no  -i ${KEYFILE}') {
+                                
                                 sh "git tag ${version_g}"
                                 sh "git push ${version_g}"
                             }
