@@ -12,9 +12,23 @@ pipeline{
 
     stages{
         stage("Get Next Version"){
-            steps{
-                echo "${DOCKER} or ${DOCKER_PSW} and ${DOCKER_USR}"
+
+        agent {
+            dockerfile {
+                label 'docker'
+                filename  'git.dockerfile'
             }
+        }
+
+        steps{
+            
+            script {
+                version_g = sh( script: "./get-next-version.sh", returnStdout: true).trim()
+                echo "Next Version is ${version_g}"
+                sh "echo -n ${version_g} > version_f"
+            }
+        }
+
             
         }
     }
