@@ -73,25 +73,5 @@ pipeline {
             }
             
         }
-
-        stage("Push Git Tag") {
-
-            agent {label 'docker'}
-            steps {
-                script {
-                    try {
-                          container = docker.build("git", "-f git.dockerfile .")
-                      
-                    }
-        
-        catch (Exception e) {
-            sh "git tag -d ${version_g} || true"
-            throw e
-        }     
-        
-    }       
-
-    }
- 
     }
 }
