@@ -85,7 +85,7 @@ pipeline {
                         container.inside {
                                 echo "Hello World"
                                 withCredentials([sshUserPrivateKey(
-                                                credentialsId: 'github-calvinpark-priv', 
+                                                credentialsId: 'github-arvind-private', 
                                                 keyFileVariable: 'KEYFILE')]) {
                                     echo "Inside Credentials"
 
