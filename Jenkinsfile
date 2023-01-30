@@ -84,24 +84,22 @@ pipeline {
                         container = docker.build("git", "-f git.dockerfile .")
                         container.inside {
                                 
-                                echo "Hello World"
-    withCredentials([sshUserPrivateKey(credentialsId: 'github-calvinpark-priv', keyFileVariable: 'KEYFILE')]) {
+                            echo "Hello World"
+                            withCredentials([sshUserPrivateKey(credentialsId: 'github-calvinpark-priv', keyFileVariable: 'KEYFILE')]) {
     
           
-          withEnv(['GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -i ${KEYFILE}']) {
-                sh "git tag ${version_g}"
-                sh "git push origin ${version_g}"   
-            }
+                                withEnv(['GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -i ${KEYFILE}']) {
+                                        sh "git tag ${version_g}"
+                                        sh "git push origin ${version_g}"   
+                                }   
 
-                                
-
-            } 
+                     } 
         }
         catch (Exception e) {
             sh "git tag -d ${version_g} || true"
             throw e
-            }     
-        }
+        }     
+        
     }       
 
     }
