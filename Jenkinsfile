@@ -85,7 +85,7 @@ pipeline {
                         container.inside {
                                 
                                 echo "Hello World"
-                                sshagent (credentials: ['github-arvind-private']) {
+                                sshagent (credentials: ['myjenkins-priv-key']) {
                                          echo "In Environment"
                                             sh("git status")
                                             sh "git tag ${version_g}"
