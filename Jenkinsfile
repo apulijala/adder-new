@@ -56,6 +56,7 @@ pipeline{
                 }
             }
             steps{
+                
                 sh """
                 export version_s=\$(cat ./version_f)
                 echo \$version_s
@@ -65,7 +66,7 @@ pipeline{
                 echo \${DOCKER_PSW} > docker-password 
                 export HOME=\${WORKSPACE}
                 cat docker-password | docker login --username \${DOCKER_USR} --password-stdin 
-                docker push  arvubd/subtractor:${version_g}
+                docker push  arvubd/adder:${version_g}
                 """
             }
             
