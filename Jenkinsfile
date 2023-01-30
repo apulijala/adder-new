@@ -64,10 +64,16 @@ pipeline{
         }
 
         steps {
-            sh  """
-                export version_s=$(cat version_f)
-                
-            """
+             sh """
+             
+            export version_s=$(cat version_f)
+            ./package.sh \${version_s}
+            ./integration-test.sh 11 8 3 ${version_g}
+            echo \${DOCKER_PSW} > docker-password
+            export HOME=${WORKSPACE}
+            cat docker-password | docker login --username \${DOCKER_USR} --password-stdin
+            docker push calvinpark/subtractor:${version_g}
+        """
             
         }
     }
