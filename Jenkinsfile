@@ -21,7 +21,7 @@ pipeline{
             
             script {
                 
-                version_g = sh( script: "./get-next-version.sh", returnStdout: true).trim()
+                version_g = sh( script: "sh ./get-next-version.sh", returnStdout: true).trim()
                 echo "Next Version is ${version_g}"
                 sh "echo -n ${version_g} > version_f"
                 sh "cat ./version_f"
@@ -34,9 +34,10 @@ pipeline{
             agent {
                 label 'docker'
             }
+
             steps{
                     script {
-                        docker_group=sh (script: "./get-docker-group.sh", returnStdout:true).trim()
+                        docker_group=sh (script: "stat -c '%g' /var/run/docker.sock", returnStdout:true).trim()
                         echo "Docker Gorup is ${docker_group}"
                     }
                 
