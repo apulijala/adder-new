@@ -13,7 +13,8 @@ pipeline {
 
     stages{
 
-        stage("Get Next Version"){
+        stage("Get Next Version") {
+
         agent {
             dockerfile {
                 label 'docker'
@@ -37,10 +38,8 @@ pipeline {
             
         }
 
-
-    }
-
     stage("Get Docker Group") {
+     
         agent { label 'docker'}
 
         steps {
@@ -53,6 +52,12 @@ pipeline {
         }
        
     }
+
+
+
+    }
+
+    
 
     
 
