@@ -89,6 +89,10 @@ pipeline {
                                                 keyFileVariable: 'KEYFILE')]) {
                                     echo "Inside Credentials"
 
+                                    withEnv(['GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -i ${KEYFILE}']) {
+                                            echo "In Environment"
+                                    }
+
                                 }
 
                         } 
