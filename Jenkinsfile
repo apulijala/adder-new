@@ -64,7 +64,8 @@ pipeline{
         }
 
         steps {
-            sh """
+            sh  (
+            """
                 export version_s=$(cat version_f)
                 ./package.sh \${version_s}
                 ./integration-test.sh 11 8 3 ${version_g}
@@ -73,6 +74,7 @@ pipeline{
                 cat docker-password | docker login --username \${DOCKER_USER} --password-stdin
                 docker push arvubd/subtractor:${version_g}
             """
+            )
         }
     }
 
