@@ -9,12 +9,16 @@ pipeline{
        }
     }
 
+    parameters {
+        string(name: 'REF', defaultValue: '\${ghprbActualCommit}', description: 'Commit to build')
+      }
+
     stages{
         
         stage ("Hello From Github") {
-            steps {
-                echo "Hello From Github"
-            }
+          steps {
+            echo "Hello From Github"
+          }
         } 
 
         stage("Compile"){
