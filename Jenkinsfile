@@ -29,6 +29,22 @@ pipeline{
             }
           }
        }
+
+        stage("Get Docker Group") {
+            agent {
+                label 'docker'
+            }
+            steps{
+                    script {
+                        docker_group=sh (script: "./get-docker-group.sh", returnStdout:true).trim()
+                        echo "Docker Gorup is ${docker_group}"
+                    }
+                
+            }
+
+           
+        }
+
     }
  
 }
