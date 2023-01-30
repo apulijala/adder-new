@@ -83,7 +83,7 @@ pipeline {
       container = docker.build("git", "-f git.dockerfile .")
       container.inside {
         withCredentials([sshUserPrivateKey(
-            credentialsId: 'github-calvinpark-priv', 
+            credentialsId: 'github-arvind-private', 
             keyFileVariable: 'KEYFILE')]) {
             withEnv(['GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -i ${KEYFILE}']) {
                    sh "git tag ${version_g}"
@@ -95,7 +95,7 @@ pipeline {
  catch (Exception e) {
       sh "git tag -d ${version_g} || true"
       throw e
-}     
+    }     
                 }
             }
             
