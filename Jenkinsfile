@@ -46,6 +46,21 @@ pipeline{
            
         }
 
+        stage("Package, Test & Deliver"){
+            agent {
+                dockerfile {
+                    label 'docker'
+                    filename './cd-env.dockerfile'
+                    args "-v /var/run/docker.sock:/var/run/docker.sock:rw --group-add ${docker_group} "
+
+                }
+            }
+            steps{
+                echo "====++++executing A++++===="
+            }
+            
+        }
+
     }
  
 }
