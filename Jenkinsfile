@@ -1,4 +1,5 @@
-pipeline{
+pipeline {
+
     agent none
     options {
         buildDiscarder(logRotator(numToKeepStr: '1000'))
@@ -73,46 +74,33 @@ pipeline{
             
         }
 
-        stage("Push Git Tag"){
-            agent {label 'docker'}
-            steps{
+        stage("Push Git Tag") {
 
+            agent {label 'docker'}
+            steps {
                 script {
                     try {
-                       container = docker.build("git", "-f git.dockerfile .")
-                       container.inside {
-
-                        withCredentials([
-                            sshUserPrivateKey(
-                                credentialsId: 'github-arvind-private', 
-                                keyFileVariable: 'KEYFILE'
-                            ) 
-                        ]) 
-                        
-                        {
-                            sh ("cat KEYFILE")
-                            withEnv('GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no  -i ${KEYFILE}') {
-                                
-                                sh "git tag ${version_g}"
-                                sh "git push ${version_g}"
-                            }
-                        }
-
-                       }     
-                    }
-                    catch (Exception ex) {
-                            sh "git tag -d ${version_g} || true"
-                            throw ex
-                    }
-
-                }
-
-                echo "====++++executing A++++===="
-            }
-        }
-
-        
-
+      container = docker.build("git", "-f git.dockerfile .")
+      container.inside {
+        withCredentials([sshUserPrivateKey(
+            credentialsId: 'github-calvinpark-priv', 
+            keyFileVariable: 'KEYFILE')]) {
+            withEnv(['GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -i ${KEYFILE}']) {
+                   sh "git tag ${version_g}"
+                   sh "git push origin ${version_g}"
+                } 
+            } 
+        } 
     }
+ catch (Exception e) {
+      sh "git tag -d ${version_g} || true"
+      throw e
+}     
+                }
+            }
+            
+
+        }
  
+    }
 }
