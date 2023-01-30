@@ -56,11 +56,12 @@ pipeline{
                 }
             }
             steps{
-                
+
                 sh """
                 export version_s=\$(cat ./version_f)
                 echo \$version_s
                 ./package.sh \${version_s}
+
                 docker image ls
                 
                 echo \${DOCKER_PSW} > docker-password 
@@ -70,6 +71,42 @@ pipeline{
                 """
             }
             
+        }
+
+        stage("Push Git Tag"){
+            agent {label 'docker'}
+            steps{
+
+                script {
+                    try {
+                       container = docker.build("git", "-f git.dockerfile")
+                       container.inside {
+
+                        withCredentials([
+                            sshUserPrivateKey(
+                                credentialsId: 'github-arvind-private', 
+                                keyFileVariable: 'KEYFILE'
+                            ) 
+                        ]) 
+                        
+                        {
+                            withEnv('GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no  -i ${KEYFILE}') {
+                                sh "git tag ${version_g}"
+                                sh "git push ${version_g}"
+                            }
+                        }
+
+                       }     
+                    }
+                    catch (Exception ex) {
+                            sh "git tag -d ${version_g} || true"
+                            throw ex
+                    }
+
+                }
+
+                echo "====++++executing A++++===="
+            }
         }
 
         
