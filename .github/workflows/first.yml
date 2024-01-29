@@ -15,6 +15,7 @@ jobs:
 
       - name: Run a Multi Line Script. 
         run: |
-          echo "Add Other Actions to Build, "
-          echo "Test and Deploy our Project."
-
+          echo "Twamasmin Karya Niryoge, Pranamam Hari Sattama "
+          echo "Hauman Yatna Ma Staya, Dukha Kshaya Kaor Bhavet"
+          echo "Tawamsamin Kraya Niryoge, Pranamam Hari Sattama. "
+          echo "Raghava Stat Samarambham, Mayi Yatno Paro Bhavet. "
