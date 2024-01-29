@@ -9,7 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
+      
+      - name: List the contents of the current directory. 
+        run: |
+          ls -alrt
+          echo "Hello World" > hello_world.txt
+          ls -alrt
+        
       - name: Run a One Line script
         run: echo Jaya, Guru Datta !!
 
@@ -19,3 +25,5 @@ jobs:
           echo "Hauman Yatna Ma Staya, Dukha Kshaya Kaor Bhavet"
           echo "Tawamsamin Kraya Niryoge, Pranamam Hari Sattama. "
           echo "Raghava Stat Samarambham, Mayi Yatno Paro Bhavet. "
+
+  
