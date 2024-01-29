@@ -1,1 +1,14 @@
+name: "Second CI Job"
+on: 
+ push: 
+   branches: [ master ]
+jobs:
+  new_build:
+    runs-on: centos:7
+    steps:
+    - name: "Just LInux commands."
+      run: 
+        echo "Jaya Guru Datta" >> datta.txt
+        ls -lrt
+    
 
