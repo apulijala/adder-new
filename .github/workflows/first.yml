@@ -1,1 +1,20 @@
+name: CI
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a One Line script
+        run: echo Jaya, Guru Datta !!
+
+      - name: Run a Multi Line Script. 
+        run: |
+          echo "Add Other Actions to Build, "
+          echo "Test and Deploy our Project."
 
